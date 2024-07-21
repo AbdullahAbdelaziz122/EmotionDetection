@@ -1,11 +1,5 @@
-import numpy as np
-import os
-import cv2
-from sklearn.model_selection import train_test_split
-
-
-train_dir = './archive/train'
-test_dir = './archive/test'
+train_dir = './EmotionDetection/archive/train'
+test_dir = './EmotionDetection/archive/test'
 img_size = 48
 ## Load images from the data directory
 
@@ -34,6 +28,11 @@ def load_images(data_dir, img_size):
     labels = np.array(labels)
 
     return images, labels
+
+def split_data(X_train, y_train):
+    X_val, X_test, y_val, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+    return X_val, X_test, y_val, y_test
+
 
 # Load training and test data
 X_train, y_train = load_images(train_dir, img_size)
